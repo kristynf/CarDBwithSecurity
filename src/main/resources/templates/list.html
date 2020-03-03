@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Kristyn's Wonderful World of Vehicles</title>
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/blank.css}">
+</head>
+<body>
+<!-- Navbar begin -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="/">List Vehicles</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            <div sec:authorize="hasAuthority('ADMIN')">
+                <li class="nav-item">
+                    <a class="nav-link" href="/addcategory">Add a Vehicle Category</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/addcar">Add a Car</a>
+                </li>
+            </div>
+
+
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <form th:action="@{/search}" method="post">
+                <input type="text" name="search" placeholder="Enter search name" required>
+                <input type="submit" value="Submit">
+            </form>
+        </ul>
+    </div>
+</nav>
+<div class="jumbotron jumbotron-fluid jumbotron-style">
+    <div class="container">
+        <h1 class="display-4">Kristyn's Wonderful World of Vehicles</h1>
+
+        <hr class="my-4">
+
+        <p class="lead">
+            <a class="btn btn-primary btn-lg"
+               href="https://www.kbb.com/?psid=19999&siomid=sb8syCRET_dc|114738491693|kelly.%20blue%20book|e|26285ajd51861|pgrid|19636699613|ptaid|aud-387341241246:kwd-133073662853|&segment=&enhancedvs=&ptaid=aud-387341241246%3Akwd-133073662853&gclid=EAIaIQobChMIusXc3tb05wIVmY7ICh22nA5HEAAYASAAEgJzbvD_BwE&pgrid=19636699613&bodystyle="
+               role="button">Price Used Cars</a>
+        </p>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-2">
+
+        </div>
+        <div th:align="center" class="col-sm-8">
+            <br><br><br><br>
+            <a href="/">
+                <botton>Index</botton>
+            </a>
+            <th:block>
+                <div th:each="category : ${categorySearch}">
+                    <h1 th:text="${category.name}"></h1>
+                    <h2><a th:href="@{/detail/{id}(id=${category.id})}">
+                        <button type="button" class="btn btn-primary">Category Details</button>
+                    </a>
+                      <!--  <a th:href="@{/update/{id}(id=${category.id})}">
+                            <button type="button" class="btn btn-primary">Update Category</button>
+                        </a>-->
+                        <div sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{/delete/{id}(id=${category.id})}">
+                            <button type="button" class="btn btn-primary">Delete Category</button>
+                        </a></div></h2>
+                </div>
+                <div th:each="car: ${carSearch1}">
+                    <p th:inline="text">[[${car.make}]] [[${car.model}]] [[${car.year}]] [[${car.msrp}]]</p>
+                    <h2><a th:href="@{/detailc/{id}(id=${car.id})}">
+                        <button type="button" class="btn btn-primary">Vehicle Details</button>
+                    </a>
+                        <div sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{/updatec/{id}(id=${car.id})}">
+                            <button type="button" class="btn btn-primary">Update Vehicle</button>
+                        </a>
+                        <a th:href="@{/deletec/{id}(id=${car.id})}">
+                            <button type="button" class="btn btn-primary">Delete Vehicle</button>
+                        </a></div></h2>
+                </div>
+                <div th:each="car: ${carSearch2}">
+                    <p th:inline="text">[[${car.make}]] [[${car.model}]] [[${car.year}]] [[${car.msrp}]]</p>
+                    <h2><a th:href="@{/detailc/{id}(id=${car.id})}">
+                        <button type="button" class="btn btn-primary">Vehicle Details</button>
+                    </a>
+                        <div sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{/updatec/{id}(id=${car.id})}">
+                            <button type="button" class="btn btn-primary">Update Vehicle</button>
+                        </a>
+                        <a th:href="@{/deletec/{id}(id=${car.id})}">
+                            <button type="button" class="btn btn-primary">Delete Vehicle</button>
+                        </a></div></h2>
+                </div>
+                <div th:each="car: ${carSearch3}">
+                    <p th:inline="text">[[${car.make}]] [[${car.model}]] [[${car.year}]] [[${car.msrp}]]</p>
+                    <h2><a th:href="@{/detailc/{id}(id=${car.id})}">
+                        <button type="button" class="btn btn-primary">Vehicle Details</button>
+                    </a>
+                        <div sec:authorize="hasAuthority('ADMIN')">
+                        <a th:href="@{/updatec/{id}(id=${car.id})}">
+                            <button type="button" class="btn btn-primary">Update Vehicle</button>
+                        </a>
+                        <a th:href="@{/deletec/{id}(id=${car.id})}">
+                            <button type="button" class="btn btn-primary">Delete Vehicle</button>
+                        </a></div></h2>
+                </div>
+
+
+            </th:block>
+        </div>
+        <div class="col-sm-2">
+
+        </div>
+    </div>
+</div>
+<footer class="container-fluid text-center">
+    <br>
+    <br>
+    <br>
+    <p>Copyright(c) KFerbs 2020</p>
+    <br>
+    <br>
+    <br>
+</footer>
+<script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js}"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js}"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+</html>

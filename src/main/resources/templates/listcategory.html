@@ -2,13 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Vehicles</title>
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <link rel="stylesheet" th:href="@{../css/style.css}">
-    <link rel="stylesheet" th:href="@{../css/blank.css}">
-
+    <link rel="stylesheet" th:href="@{/blank.css}">
 </head>
 <body>
 <!-- Navbar begin -->
@@ -57,57 +55,28 @@
         </p>
     </div>
 </div>
-<div class="container">
+
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Sign In</h5>
-                    <div th:if="${param.error}">
-                        Invalid username or password
-                    </div>
-                    <div th:if="${param.logout}">
-                        You have been logged out
-                    </div>
-                    <form th:action="@{/login}" method="post" class="form-signin">
-                        <div class="form-label-group">
-                            <input type="text"  name="username" id="inputEmail" class="form-control" placeholder="Username" required autofocus>
-                            <label for="inputEmail">Username</label>
-                        </div>
+        <div class="col-sm-2">
 
-                        <div class="form-label-group">
-                            <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-                            <label for="inputPassword">Password</label>
-                        </div>
+        </div>
+        <div th:align="center" class="col-sm-8">
+            <h1>Vehicles by Category</h1><br>
+            <div th:each="car : ${category.cars}">
+                <div th:text="${car.make}"></div>
+                <div th:text="${car.model}"></div>
+                <div th:text="${car.year}"></div>
+                <div th:text="${car.msrp}"></div>
+                <br>
 
-                        <!--<div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="customCheck1">
-                            <label class="custom-control-label" for="customCheck1">Remember password</label>
-                        </div>-->
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-
-                    </form>
-                </div>
             </div>
+        </div>
+        <div class="col-sm-2">
+
         </div>
     </div>
 </div>
-
- <!--   <h1>Login Page</h1>
-        <div th:if="${param.error}">
-            Invalid username or password
-        </div>
-        <div th:if="${param.logout}">
-            You have been logged out
-        </div>
-    <form th:action="@{/login}" method="post">
-        <div><label>User name: <input type="text" name="username" />
-        </label></div>
-
-        <div><label>Password: <input type="password" name="password" />
-        </label></div>
-        <div><input type="submit" value="Sign In!" /></div>
-    </form>-->
 <footer class="container-fluid text-center">
     <br>
     <br>

@@ -1,0 +1,27 @@
+.text-align-center{
+    text-align: center;
+}
+
+.jumbotron-style{
+
+    background-image: url("https://res.cloudinary.com/kristynf/image/upload/v1582922309/cars-for-sale_se50g8.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Julius Sans One', sans-serif;
+
+    }
+
+/*
+.left-column-style{
+    background-image: url("/images/bluecar.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.right-column-style{
+    background-image: url("/images/silvercar.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}*/
