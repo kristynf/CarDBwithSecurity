@@ -95,12 +95,12 @@
                         <div>
                             <thead>
                             <tr>
-                                <td align="center"><b>Category Name</b></td>
-                                <td align="center"><b>Vehicle Make</b></td>
-                                <td align="center"><b>Vehicle Model</b></td>
-                                <td align="center"><b>Vehicle Year</b></td>
-                                <td align="center"><b>Vehicle MSRP</b></td>
-                                <td align="center"><b>Vehicle Photo</b></td>
+                                <th align="center"><b>Category Name</b></th>
+                                <th align="center"><b>Vehicle Make</b></th>
+                                <th align="center"><b>Vehicle Model</b></th>
+                                <th align="center"><b>Vehicle Year</b></th>
+                                <th align="center"><b>Vehicle MSRP</b></th>
+                                <th align="center"><b>Vehicle Photo</b></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -116,7 +116,8 @@
                                 </div>
                                 <div th:unless="${car.photo} == null">
                                     <td align="center" ><img class="image-resize" th:src="${car.photo}"></td>"
-                                </div></tr>
+                                </div>
+                            </tr>
                             <tr>
 
                                 <td>
@@ -144,9 +145,11 @@
                                     </a>
                                     </div>
                                 </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
-                            <br>
-                            <br>
                             </tbody>
                         </div>
                     </th:block>
