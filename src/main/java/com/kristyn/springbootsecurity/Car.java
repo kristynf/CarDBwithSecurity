@@ -14,6 +14,8 @@ public class Car {
     private String msrp;
     private String photo;
 
+    @ManyToOne
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
@@ -89,5 +91,11 @@ public class Car {
     }
 
 
+    public User getUser() {
+        return user;
+    }
 
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
