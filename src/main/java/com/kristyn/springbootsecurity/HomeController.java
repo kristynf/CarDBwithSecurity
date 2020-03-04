@@ -167,19 +167,10 @@ public class HomeController {
         return "index";
         }
 
-   /* @RequestMapping("/")
-    public String index(){
-        return "index1";
-    }*/
+
     @RequestMapping("/login")
     public String login(){
         return "login";
     }
 
-    @RequestMapping("/secure")
-    public String secure(Principal principal, Model model){
-        String username = principal.getName();
-        model.addAttribute("user", userRepository.findByUsername(username));
-        return "secure";
-    }
 }
