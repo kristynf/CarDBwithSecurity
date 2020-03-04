@@ -51,6 +51,7 @@ public class Dataloader implements CommandLineRunner {
         car.setModel("Forrester");
         car.setYear("2010");
         car.setMsrp("$10000");
+        car.setPhoto("https://res.cloudinary.com/kristynf/image/upload/v1582923471/subaruforester_rwn0g6.jpg");
 
 
         Car car1 = new Car();

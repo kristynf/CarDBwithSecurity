@@ -12,6 +12,7 @@ public class Car {
     private String model;
     private String year;
     private String msrp;
+    private String photo;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -21,11 +22,12 @@ public class Car {
     public Car() {
     }
 
-    public Car(String make, String model, String year, String msrp, Category category) {
+    public Car(String make, String model, String year, String msrp, String photo, Category category) {
         this.make = make;
         this.model = model;
         this.year = year;
         this.msrp = msrp;
+        this.photo = photo;
         this.category = category;
 
     }
@@ -70,6 +72,14 @@ public class Car {
         this.msrp = msrp;
     }
 
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
     public Category getCategory() {
         return category;
     }
@@ -77,6 +87,7 @@ public class Car {
     public void setCategory(Category category) {
         this.category = category;
     }
+
 
 
 }

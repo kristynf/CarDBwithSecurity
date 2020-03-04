@@ -6,7 +6,8 @@
     <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/blank.css}">
+    <link rel="stylesheet" th:href="@{../css/style.css}">
+    <link rel="stylesheet" th:href="@{../css/blank.css}">
 </head>
 <body>
 <!-- Navbar begin -->
@@ -19,9 +20,16 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+            <li sec:authorize="isAuthenticated()" class="nav-link text-warning" th:inline="text">
+                Welcome [[${#authentication.name}]]!
             </li>
+            <li class="nav-item">
+                <a sec:authorize="!isAuthenticated()" class="nav-link text-black" href="/login">Login</a>
+            </li>
+            <div sec:authorize="!isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register as a User</a>
+                </li></div>
             <div sec:authorize="hasAuthority('ADMIN')">
                 <li class="nav-item">
                     <a class="nav-link" href="/addcategory">Add a Vehicle Category</a>
@@ -82,15 +90,17 @@
                             <td th:text="${car.msrp}"></td>
                             <td th:text="${category}"></td>
                             <td>
+                                <div sec:authorize="hasAuthority('ADMIN')">
                                 <a th:href="@{/updatec/{id}(id=${car.id})}">
                                     <button type="button" class="btn btn-primary">Update Vehicle</button>
-                                </a>
+                                </a></div>
                                 <a th:href="@{/detailc/{id}(id=${car.id})}">
                                     <button type="button" class="btn btn-primary">Vehicle Details</button>
                                 </a>
+                                <div sec:authorize="hasAuthority('ADMIN')">
                                 <a th:href="@{/deletec/{id}(id=${car.id})}">
                                     <button type="button" class="btn btn-primary">Delete Vehicle</button>
-                                </a>
+                                </a></div>
                             </td>
                         </tr>
                     </div>

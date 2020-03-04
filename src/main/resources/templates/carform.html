@@ -6,7 +6,8 @@
     <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/blank.css}">
+    <link rel="stylesheet" th:href="@{../css/blank.css}">
+    <link rel="stylesheet" th:href="@{../css/style.css}">
 </head>
 <body>
 <!-- Navbar begin -->
@@ -19,9 +20,16 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+            <li sec:authorize="isAuthenticated()" class="nav-link text-warning" th:inline="text">
+                Welcome [[${#authentication.name}]]!
             </li>
+            <li class="nav-item">
+                <a sec:authorize="!isAuthenticated()" class="nav-link text-black" href="/login">Login</a>
+            </li>
+            <div sec:authorize="!isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register as a User</a>
+                </li></div>
             <div sec:authorize="hasAuthority('ADMIN')">
                 <li class="nav-item">
                     <a class="nav-link" href="/addcategory">Add a Vehicle Category</a>
@@ -72,7 +80,8 @@
                 Vehicle Make: <input type="text" th:field="*{make}"><br />
                 Vehicle Model: <input type="text" th:field="*{model}"><br />
                 Vehicle Year: <input type="text" th:field="*{year}"><br />
-                Vehicle MSRP: <input type="text" th:field="*{msrp}"><br /><br>
+                Vehicle MSRP: <input type="text" th:field="*{msrp}"><br />
+                Vehicle Photo: <input type="file" name="file"><br /><br>
                 <select th:field="*{category}">
                     <div th:each="category: ${categories}">
                         <option th:value="${category.id}" th:text="${category.name}">

@@ -6,7 +6,8 @@
     <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/blank.css}">
+    <link rel="stylesheet" th:href="@{../css/style.css}">
+    <link rel="stylesheet" th:href="@{../css/blank.css}">
 </head>
 <body>
 <!-- Navbar begin -->
@@ -19,9 +20,16 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+            <li sec:authorize="isAuthenticated()" class="nav-link text-warning" th:inline="text">
+                Welcome [[${#authentication.name}]]!
             </li>
+            <li class="nav-item">
+                <a sec:authorize="!isAuthenticated()" class="nav-link text-black" href="/login">Login</a>
+            </li>
+            <div sec:authorize="!isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register as a User</a>
+                </li></div>
             <div sec:authorize="hasAuthority('ADMIN')">
                 <li class="nav-item">
                     <a class="nav-link" href="/addcategory">Add a Vehicle Category</a>
@@ -70,6 +78,7 @@
                 <tr>
                     <td th:text="${category.name}"></td>
                     <td>
+                        <div sec:authorize="hasAuthority('ADMIN')">
                         <a th:href="@{/update/{id}(id=${category.id})}">
                             <button type="button" class="btn btn-primary">Update Category</button>
                         </a>
@@ -79,7 +88,7 @@
                         <a th:href="@{/delete/{id}(id=${category.id})}">
                             <button type="button" class="btn btn-primary">Delete Category</button>
                         </a>
-                    </td></tr>
+                        </div></td></tr>
             </table>
         </div>
         <div class="col-sm-2">

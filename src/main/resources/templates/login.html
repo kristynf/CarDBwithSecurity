@@ -21,9 +21,16 @@
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+            <li sec:authorize="isAuthenticated()" class="nav-link text-warning" th:inline="text">
+                Welcome [[${#authentication.name}]]!
             </li>
+            <li class="nav-item">
+                <a sec:authorize="!isAuthenticated()" class="nav-link text-black" href="/login">Login</a>
+            </li>
+            <div sec:authorize="!isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="/register">Register as a User</a>
+                </li></div>
             <div sec:authorize="hasAuthority('ADMIN')">
                 <li class="nav-item">
                     <a class="nav-link" href="/addcategory">Add a Vehicle Category</a>

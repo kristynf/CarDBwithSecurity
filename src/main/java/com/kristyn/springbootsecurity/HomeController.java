@@ -1,12 +1,16 @@
 package com.kristyn.springbootsecurity;
 
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.util.Map;
 
 import javax.validation.Valid;
 
@@ -23,6 +27,9 @@ public class HomeController {
 
     @Autowired
     CarRepository carRepository;
+
+    @Autowired
+    CloudinaryConfig cloudc;
 
     @RequestMapping("/")
     public String index(Model model){
@@ -51,18 +58,34 @@ public class HomeController {
     }
 
 
-    @GetMapping("/addcar")
+   @GetMapping("/addcar")
     public String newCar(Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("car", new Car());
         return "carform";
     }
-
     @PostMapping("/processcar")
+    public String processCar(@ModelAttribute Car car, @RequestParam("file") MultipartFile file){
+        if(file.isEmpty()){
+            return "redirect:/carform";
+        }
+        try {
+            Map uploadResult = cloudc.upload(file.getBytes(),
+                    ObjectUtils.asMap("resourcetype", "auto"));
+            car.setPhoto(uploadResult.get("url").toString());
+            carRepository.save(car);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "redirect:/carform";
+        }
+        return "redirect:/";
+    }
+
+   /* @PostMapping("/processcar")
     public String processCar(@ModelAttribute Car car) {
         carRepository.save(car);
         return "redirect:/";
-    }
+    }*/
 
     @RequestMapping("/search")
     public String search(@RequestParam("search") String search, Model model) {
