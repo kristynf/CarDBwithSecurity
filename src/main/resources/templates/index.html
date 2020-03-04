@@ -68,7 +68,8 @@
             </div>
         </div>
 
-        <div sec:authorize="hasAuthority('ADMIN')" class="col-sm-8">
+        <div  class="col-sm-8">
+            <div sec:authorize="hasAuthority('ADMIN')">
             <h2 th:align="center">
                 <a th:href="@{/addcategory}">
                     <button type="button" class="btn btn-outline-primary">Add a Vehicle Category</button>
@@ -79,7 +80,7 @@
                     <button type="button" class="btn btn-outline-info">Add a Vehicle</button>
                 </a>
             </h2>
-
+        </div>
             <h1 align="center">Category/Car List</h1>
             <table th:align="center">
                 <th:block th:each="category: ${categories}">
@@ -153,7 +154,7 @@
     <br>
     <br>
     <br>
-</footer>r>
+</footer>
 
 <script th:src="@{https://code.jquery.com/jquery-3.2.1.slim.min.js}"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
