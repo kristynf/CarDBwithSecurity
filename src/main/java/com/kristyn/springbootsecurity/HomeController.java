@@ -67,7 +67,9 @@ public class HomeController {
     @PostMapping("/processcar")
     public String processCar(@ModelAttribute Car car, @RequestParam("file") MultipartFile file){
         if(file.isEmpty()){
-            return "redirect:/carform";
+            carRepository.save(car);
+            return "redirect:/";
+
         }
         try {
             Map uploadResult = cloudc.upload(file.getBytes(),
@@ -76,8 +78,9 @@ public class HomeController {
             carRepository.save(car);
         } catch (IOException e) {
             e.printStackTrace();
-            return "redirect:/carform";
+            return "redirect:/";
         }
+
         return "redirect:/";
     }
 

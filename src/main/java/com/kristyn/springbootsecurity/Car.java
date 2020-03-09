@@ -22,6 +22,7 @@ public class Car {
     private Category category;
 
     public Car() {
+        this.photo = ("https://res.cloudinary.com/kristynf/image/upload/v1583595805/genericcar_gc2ypb.jpg");
     }
 
     public Car(String make, String model, String year, String msrp, String photo, Category category) {
