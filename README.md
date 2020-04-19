@@ -18,6 +18,7 @@ This site is also deployed to Heroku: https://gentle-bayou-85206.herokuapp.com/
 ## Built With
 
 * [Java 8](https://www.java.com/en/) - Backend Language
+* [Spring Boot](https://spring.io/projects/spring-boot) - Framework
 * [IntelliJ](https://www.jetbrains.com/idea/) - IDE used
 * [Maven](http://maven.apache.org/) - Dependency Management
 * [Thymeleaf](http://www.thymeleaf.org/) - Template Engine
